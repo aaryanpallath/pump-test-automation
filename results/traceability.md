@@ -1,6 +1,6 @@
 # Requirements Traceability Matrix — SRS-PUMP v1.0
 
-Generated 2026-10-19 from commit `89b8b53` against `pumpctl-san`. 14 of 14 requirements verified.
+Generated 2026-10-19 from commit `cd0be11` against `pumpctl-san`. 14 of 14 requirements verified.
 
 | Requirement | Text | Tests | Verdict |
 |---|---|---|---|

@@ -1,4 +1,3 @@
-import os
 import subprocess
 from pathlib import Path
 
@@ -8,12 +7,6 @@ from .device import Device
 from .traceability import Traceability
 
 ROOT = Path(__file__).resolve().parent.parent
-
-
-def pytest_addoption(parser):
-    parser.addoption("--pumpctl", default=os.environ.get("PUMPCTL"),
-                     help="controller binary under test (default: sanitizer build)")
-    parser.addoption("--require-coverage", action="store_true", help="fail if any requirement has no test")
 
 
 def pytest_configure(config):
