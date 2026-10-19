@@ -104,7 +104,7 @@ static void simulate(controller *c) {
     if (c->rpm == 0) flow = 0;
     if (c->faults[F_OCCLUSION]) flow *= 0.2;
     c->flow = flow;
-    c->purge = c->faults[F_PURGE_LEAK] ? 200.0 : c->faults[F_PURGE_BLOCK] ? 1200.0 : 500.0 + 20.0 * sin(c->now_ms / 7000.0);
+    c->purge = c->faults[F_PURGE_LEAK] ? 200.0 : c->faults[F_PURGE_BLOCK] ? 1200.0 : 500.0 + 20.0 * sin((double)c->now_ms / 7000.0);
     c->lvp = c->faults[F_SENSOR] ? NAN : lvp;
     c->aop = c->faults[F_SENSOR] ? NAN : aop;
 }
