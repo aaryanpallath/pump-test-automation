@@ -1,0 +1,34 @@
+# Software Requirements Specification (SRS) for the simulated blood pump controller.
+# Educational simulation inspired by catheter-based heart pumps; not a medical device.
+# Each automated test declares the requirement IDs it verifies with @pytest.mark.req("SRS-xxx").
+document: SRS-PUMP
+version: 1.0
+requirements:
+  - id: SRS-001
+    text: On START, the controller shall ramp the motor to the speed of the selected performance level (P1-P9) within 2 s.
+  - id: SRS-002
+    text: SET PLEVEL shall accept integers 0-9 and reject any other value with an error, leaving the level unchanged.
+  - id: SRS-003
+    text: Estimated flow shall increase monotonically with performance level under fixed hemodynamics.
+  - id: SRS-004
+    text: The controller shall raise a HIGH priority SUCTION alarm within 3 s when left-ventricular pressure falls below 0 mmHg on 2 consecutive beats.
+  - id: SRS-005
+    text: The controller shall raise a MEDIUM priority LOW_FLOW alarm when estimated flow stays below 1.0 L/min for 5 s while running, and not before.
+  - id: SRS-006
+    text: The controller shall raise a MEDIUM priority PURGE_LOW alarm when purge pressure stays below 300 mmHg for 3 s, and a HIGH priority PURGE_HIGH alarm above 1100 mmHg for 3 s.
+  - id: SRS-007
+    text: On motor stall (speed below 10% of target for 1 s while running), the controller shall raise a HIGH priority MOTOR_STALL alarm and stop the motor.
+  - id: SRS-008
+    text: On a pressure sensor fault, the controller shall raise a MEDIUM priority SENSOR_FAULT alarm and report flow as unavailable rather than a stale value.
+  - id: SRS-009
+    text: Acknowledging an alarm shall silence it for 120 s; if the condition persists after the silence period, the alarm shall become audible again.
+  - id: SRS-010
+    text: HIGH priority alarms shall stay latched after their condition clears until acknowledged; MEDIUM alarms shall clear automatically.
+  - id: SRS-011
+    text: Active alarms shall be reported highest priority first, and oldest first within a priority.
+  - id: SRS-012
+    text: Every alarm activation, clearance and acknowledgement, and every state change, shall be written to the event log with a timestamp.
+  - id: SRS-013
+    text: The controller shall reject malformed, unknown or over-long (more than 127 bytes) commands with exactly one error response and keep operating; no input shall crash it.
+  - id: SRS-014
+    text: STOP shall bring the motor to 0 rpm within 1 s from any running state.
